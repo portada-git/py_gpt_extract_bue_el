@@ -25,10 +25,10 @@ MESSAGES_CONFIG = {
 
 EXAMPLES = """EJEMPLO 1: 
   input = 'Fecha de arribo: 31 de enero de 1853 | Génova, el 4 de noviembre, Santa Cruz de Tenerife, el 7 de diciembre, Montevideo, el 25 del corriente, bergantin sardo Acorto Ligure, 172 ton., capitan Luis Baner, á Bartolomé Viale y Ca.-con 80 pipas vino, 25 barricas aceite, 1,000 cajas fideos.' 
-  output = '{ "travel_departure_date": "1853-11-04", "travel_arrival_date": "1854-01-23", "travel_duration_value": null, "travel_duration_unit": null, "travel_arrival_moment": null, "travel_departure_port": "Génova", "travel_port_of_call_list": [ { "port_of_call_place": "Santa Cruz de Tenerife", "port_of_call_arrival_date": "1853-12-07", "port_of_call_departure_date": null }, { "port_of_call_place": "Montevideo", "port_of_call_arrival_date": "1853-12-25", "port_of_call_departure_date": null } ], "travel_arrival_port": "Buenos Aires", "ship_type": "bergantin", "ship_name": "Acorto Ligure", "ship_tons_capacity": 172, "ship_tons_units": "ton", "ship_flag": "sardo", "master_role": "capitan", "master_name": "Luis Baner", "ship_agent_name": null, "crew_number": null, "cargo_list": [ { "cargo_merchant_name": "Bartolomé Viale y Ca.", "cargo": [ { "cargo_quantity": 80, "cargo_unit": "pipas", "cargo_commodity": "vino" }, { "cargo_quantity": 25, "cargo_unit": "barricas", "cargo_commodity": "aceite" }, { "cargo_quantity": 1000, "cargo_unit": "cajas", "cargo_commodity": "fideos" } ] } ], "quarantine": null, "forced_arrival": null, "obs": null }'
+  output = '{ "travel_departure_date": "1853-11-04", "travel_arrival_date": "1854-01-23", "travel_duration_value": null, "travel_duration_unit": null, "travel_arrival_moment": null, "travel_departure_port": "Génova", "travel_port_of_call_list": [ { "port_of_call_place": "Santa Cruz de Tenerife", "port_of_call_arrival_date": "1853-12-07", "port_of_call_departure_date": null }, { "port_of_call_place": "Montevideo", "port_of_call_arrival_date": "1853-12-25", "port_of_call_departure_date": null } ], "travel_arrival_port": "Buenos Aires", "ship_type": "bergantin", "ship_name": "Acorto Ligure", "ship_tons_capacity": 172, "ship_tons_units": "ton", "ship_flag": "sardo", "master_role": "capitan", "master_name": "Luis Baner", "ship_agent_name": null, "crew_number": null, "cargo_list": [ { "cargo_merchant_name": "Bartolomé Viale y Ca.", "cargo": [ { "cargo_quantity": 80, "cargo_unit": "pipas", "cargo_commodity": "vino" }, { "cargo_quantity": 25, "cargo_unit": "barricas", "cargo_commodity": "aceite" }, { "cargo_quantity": 1000, "cargo_unit": "cajas", "cargo_commodity": "fideos" } ] } ], "passengers": null, "in_ballast": null, "quarantine": null, "forced_arrival": null, "obs": null }'
   EJEMPLO 2: 
   input = 'Fecha de arribo: 30 de enero de 1853 | Bergantin goleta paquete oriental "Lucitano", de 121 tns., cap. Dalorso, de Montevideo el 27; á Llavallol é hijos, 50 cuarterolas vino, 12 cajas mercancias, 1,500 baldosas-40 pasageros.' 
-  output = '{ "travel_departure_date": "1853-01-27", "travel_arrival_date": "1853-01-30", "travel_duration_value": null, "travel_duration_unit": null, "travel_arrival_moment": null, "travel_departure_port": "Montevideo", "travel_port_of_call_list": [], "travel_arrival_port": "Buenos Aires", "ship_type": "bergantin goleta paquete", "ship_name": "Lucitano", "ship_tons_capacity": 121, "ship_tons_units": "tns", "ship_flag": "oriental", "master_role": "cap.", "master_name": "Dalosso", "ship_agent_name": null, "crew_number": null, "cargo_list": [ { "cargo_merchant_name": "Llavallol é hijos", "cargo": [ { "cargo_quantity": 50, "cargo_unit": "cuarterolas", "cargo_commodity": "vino" }, { "cargo_quantity": 12, "cargo_unit": "cajas", "cargo_commodity": "mercancias" }, { "cargo_quantity": 1500, "cargo_unit": null, "cargo_commodity": "baldosas" } ], "passengers": 40, "in_ballast": false } ], "quarantine": null, "forced_arrival": null, "obs": null }'"""
+  output = '{ "travel_departure_date": "1853-01-27", "travel_arrival_date": "1853-01-30", "travel_duration_value": null, "travel_duration_unit": null, "travel_arrival_moment": null, "travel_departure_port": "Montevideo", "travel_port_of_call_list": [], "travel_arrival_port": "Buenos Aires", "ship_type": "bergantin goleta paquete", "ship_name": "Lucitano", "ship_tons_capacity": 121, "ship_tons_units": "tns", "ship_flag": "oriental", "master_role": "cap.", "master_name": "Dalosso", "ship_agent_name": null, "crew_number": null, "cargo_list": [ { "cargo_merchant_name": "Llavallol é hijos", "cargo": [ { "cargo_quantity": 50, "cargo_unit": "cuarterolas", "cargo_commodity": "vino" }, { "cargo_quantity": 12, "cargo_unit": "cajas", "cargo_commodity": "mercancias" }, { "cargo_quantity": 1500, "cargo_unit": null, "cargo_commodity": "baldosas" } ] } ], "passengers": 40, "in_ballast": false, "quarantine": null, "forced_arrival": null, "obs": null }'"""
 
 # Template del JSON actualizado
 JSON_TEMPLATE = {
@@ -50,6 +50,8 @@ JSON_TEMPLATE = {
     'ship_agent_name': None,
     'crew_number': None,
     'cargo_list': [],
+    'passengers': None,
+    'in_ballast': None,
     'quarantine': None,
     'forced_arrival': None,
     'obs': None
@@ -75,6 +77,8 @@ FIELD_DEFINITIONS = {
     'ship_agent_name': 'null',
     'crew_number': 'null',
     'cargo_list': 'Lista de objetos que describen las mercancías y sus dueños o destinatarios. Cada objeto en la lista debe seguir esta estructura (en este orden): {"cargo_merchant_name": "Nombre del consignatario", "cargo": [{"cargo_quantity": número, "cargo_unit": "unidad", "cargo_commodity": "tipo de mercancía"}]}. Es común que se utilice la palabra "idem" para referirse a la unidad o mercancía inmediatamente anterior, evitando la repetición. Puede ocurrir que tanto el valor de la clave "cargo_unit" como de la clave "cargo_commodity"sea idem. Ejemplo: "Coneh y Levy idem idem". Si el número de la carga (cargo_quantity) es ilegible o no está presente, debe asignarse un valor de 0 (ejemplo: "Coneh y Levy idem idem"). Ejemplo de texto aprocesar: "á Zimermmann y ca., 1 cajon mercancias, á Nicholson Green y ca., 29 cajones mercancias, 1 idem muestras, á Corach y Mora idem idem, 1 idem cristales". Ejemplo extracción de datos: [{"cargo_merchant_name": "Zimermmann y ca.", "cargo": [{"cargo_quantity": 1, "cargo_unit": "cajon", "cargo_commodity": "mercancias"}]}, {"cargo_merchant_name": "Nicholson Green y ca.", "cargo": [{"cargo_quantity": 29, "cargo_unit": "cajones", "cargo_commodity": "mercancias"}, {"cargo_quantity": 1, "cargo_unit": "idem", "cargo_commodity": "muestras"}]}, {"cargo_merchant_name": "Corach y Mora", "cargo": [{"cargo_quantity": 0, "cargo_unit": "idem", "cargo_commodity": "idem"}, {"cargo_quantity": 1, "cargo_unit": "idem", "cargo_commodity": "cristales"}]}]. Hay mercancías (cargo_commodity) que no explicitan unidades, por ejemplo "baldosas"; en estos caso en "cargo_unit" va null y en "cargo_commodity" va "baldosas".',
+    'passengers': 'Representa la cantidad total de pasajeros.',
+    'in_ballast': 'Define se se mencion que la embarcación está "en lastre" [True | False]',
     'quarantine': 'Información relativa a la existencia de condiciones especiales de la llegada motivadas por circunstancias sanitarias que imponen la cuarentena.',
     'forced_arrival': 'Información sobre la llegada al puerto debido a causas imprevistas, como un arribo forzoso por temporal, avería u otras emergencias.',
     'obs': 'Notas o comentarios adicionales que aborden aspectos no contemplados en las variables registradas, proporcionando información contextual o relevante sobre el evento.'
@@ -234,21 +238,21 @@ JSON_SCHEMA = {
                   "required": ["cargo_quantity", "cargo_unit", "cargo_commodity"],
                   "additionalProperties": False
                 }
-              },
-              "passengers": {
-                "type": "number",
-                "description": "Representa la cantidad total de pasajeros.",
-                "nullable": True
-              },
-              "in_ballast": {
-                "type": "boolean",
-                "description": "Define se se mencion que la embarcación está 'en lastre' [True | False]",
-                "nullable": True
               }
             },
-            "required": ["cargo_merchant_name", "cargo", "passengers", "in_ballast"],
+            "required": ["cargo_merchant_name", "cargo"],
             "additionalProperties": False
           }
+        },
+        "passengers": {
+          "type": "number",
+          "description": "Representa la cantidad total de pasajeros.",
+          "nullable": True
+        },
+        "in_ballast": {
+          "type": "boolean",
+          "description": "Define se se mencion que la embarcación está 'en lastre' [True | False]",
+          "nullable": True
         },
         "quarantine": {
           "type": "string",
@@ -285,6 +289,8 @@ JSON_SCHEMA = {
         "ship_agent_name",
         "crew_number",
         "cargo_list",
+        "passengers",
+        "in_ballast",
         "quarantine",
         "forced_arrival",
         "obs"
