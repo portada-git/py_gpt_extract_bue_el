@@ -64,7 +64,7 @@ FIELD_DEFINITIONS = {
     'travel_duration_value': 'null',
     'travel_duration_unit': 'null',
     'travel_arrival_moment': 'null',
-    'travel_departure_port': 'El nombre del puerto desde el cual salió el barco. Simpre es el primer puerto de salida, los siguientes puertos de salidas, si los hay, son puertos de escala.',
+    'travel_departure_port': 'El nombre del puerto desde el cual salió el barco. Siempre es el primer puerto de salida, los siguientes puertos de salidas, si los hay, son puertos de escala.',
     'travel_port_of_call_list': 'Lista de objetos que describen los puertos (y opcionalmente más información como fechas de llegada o salida) en los que el barco hizo escala durante su trayecto al puerto de llegada.',
     'travel_arrival_port': 'Buenos Aires',
     'ship_type': 'El tipo de embarcación, e.g., bergantín, fragata, vapor.',
@@ -76,9 +76,9 @@ FIELD_DEFINITIONS = {
     'master_name': 'El nombre de la persona responsable a bordo.',
     'ship_agent_name': 'null',
     'crew_number': 'null',
-    'cargo_list': 'Lista de objetos que describen las mercancías y sus dueños o destinatarios. Cada objeto en la lista debe seguir esta estructura (en este orden): {"cargo_merchant_name": "Nombre del consignatario", "cargo": [{"cargo_quantity": número, "cargo_unit": "unidad", "cargo_commodity": "tipo de mercancía"}]}. Es común que se utilice la palabra "idem" para referirse a la unidad o mercancía inmediatamente anterior, evitando la repetición. Puede ocurrir que tanto el valor de la clave "cargo_unit" como de la clave "cargo_commodity"sea idem. Ejemplo: "Coneh y Levy idem idem". Si el número de la carga (cargo_quantity) es ilegible o no está presente, debe asignarse un valor de 0 (ejemplo: "Coneh y Levy idem idem"). Ejemplo de texto aprocesar: "á Zimermmann y ca., 1 cajon mercancias, á Nicholson Green y ca., 29 cajones mercancias, 1 idem muestras, á Corach y Mora idem idem, 1 idem cristales". Ejemplo extracción de datos: [{"cargo_merchant_name": "Zimermmann y ca.", "cargo": [{"cargo_quantity": 1, "cargo_unit": "cajon", "cargo_commodity": "mercancias"}]}, {"cargo_merchant_name": "Nicholson Green y ca.", "cargo": [{"cargo_quantity": 29, "cargo_unit": "cajones", "cargo_commodity": "mercancias"}, {"cargo_quantity": 1, "cargo_unit": "idem", "cargo_commodity": "muestras"}]}, {"cargo_merchant_name": "Corach y Mora", "cargo": [{"cargo_quantity": 0, "cargo_unit": "idem", "cargo_commodity": "idem"}, {"cargo_quantity": 1, "cargo_unit": "idem", "cargo_commodity": "cristales"}]}]. Hay mercancías (cargo_commodity) que no explicitan unidades, por ejemplo "baldosas"; en estos caso en "cargo_unit" va null y en "cargo_commodity" va "baldosas".',
+    'cargo_list': 'Lista de objetos que describen las mercancías y sus dueños o destinatarios. Cada objeto en la lista debe seguir esta estructura (en este orden): {"cargo_merchant_name": "Nombre del consignatario", "cargo": [{"cargo_quantity": número, "cargo_unit": "unidad", "cargo_commodity": "tipo de mercancía"}]}. Es común que se utilice la palabra "idem" para referirse a la unidad o mercancía inmediatamente anterior, evitando la repetición. Puede ocurrir que tanto el valor de la clave "cargo_unit" como de la clave "cargo_commodity"sea idem. Ejemplo: "Coneh y Levy idem idem". Si el número de la carga (cargo_quantity) es ilegible o no está presente, debe asignarse un valor de 0 (ejemplo: "Coneh y Levy idem idem"). Ejemplo de texto aprocesar: "á Zimermmann y ca., 1 cajon mercancias, á Nicholson Green y ca., 29 cajones mercancias, 1 idem muestras, á Corach y Mora idem idem, 1 idem cristales". Ejemplo extracción de datos: [{"cargo_merchant_name": "Zimermmann y ca.", "cargo": [{"cargo_quantity": 1, "cargo_unit": "cajon", "cargo_commodity": "mercancias"}]}, {"cargo_merchant_name": "Nicholson Green y ca.", "cargo": [{"cargo_quantity": 29, "cargo_unit": "cajones", "cargo_commodity": "mercancias"}, {"cargo_quantity": 1, "cargo_unit": "idem", "cargo_commodity": "muestras"}]}, {"cargo_merchant_name": "Corach y Mora", "cargo": [{"cargo_quantity": 0, "cargo_unit": "idem", "cargo_commodity": "idem"}, {"cargo_quantity": 1, "cargo_unit": "idem", "cargo_commodity": "cristales"}]}]. Hay mercancías (cargo_commodity) que no explicitan unidades, por ejemplo "baldosas"; en estos casos en "cargo_unit" va null y en "cargo_commodity" va "baldosas".',
     'passengers': 'Representa la cantidad total de pasajeros.',
-    'in_ballast': 'Define se se mencion que la embarcación está "en lastre" [True | False]',
+    'in_ballast': 'Define si se menciona que la embarcación está "en lastre" [True | False]',
     'quarantine': 'Información relativa a la existencia de condiciones especiales de la llegada motivadas por circunstancias sanitarias que imponen la cuarentena.',
     'forced_arrival': 'Información sobre la llegada al puerto debido a causas imprevistas, como un arribo forzoso por temporal, avería u otras emergencias.',
     'obs': 'Notas o comentarios adicionales que aborden aspectos no contemplados en las variables registradas, proporcionando información contextual o relevante sobre el evento.'
@@ -251,7 +251,7 @@ JSON_SCHEMA = {
         },
         "in_ballast": {
           "type": "boolean",
-          "description": "Define se se mencion que la embarcación está 'en lastre' [True | False]",
+          "description": "Define si se menciona que la embarcación está 'en lastre' [True | False]",
           "nullable": True
         },
         "quarantine": {
